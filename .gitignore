@@ -1,0 +1,29 @@
+# Dependencies
+# Never commit this folder; it is massive and easily rebuilt via npm install
+node_modules/
+/jspm_packages/
+
+# Security & Secrets
+# CRITICAL: This keeps your Supabase credentials and VAPID private keys completely private
+.env
+.env.local
+.env.*.local
+
+# Vercel Deployment Junk
+# Local Vercel system files generated during local builds/tests
+.vercel
+
+# Debugging and System Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Alarms</title>
+    <link rel="manifest" href="/manifest.json">
+    <style>
+        body {
+            font-family: -apple-system, sans-serif;
+            padding: 20px;
+            background: #f4f7f6;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        input,
+        select,
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: #007aff;
+            color: white;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .left-pane, .right-pane {
+            flex: 1;
+        }
+        
+        .bday-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .bday-actions button {
+            width: auto;
+            padding: 6px 12px;
+            margin-left: 5px;
+            font-size: 0.9em;
+        }
+        
+        .btn-edit { background: #ff9500; }
+        .btn-delete { background: #ff3b30; }
+        
+        @media (max-width: 768px) {
+            .container { flex-direction: column; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="left-pane">
+            <div class="card">
+                <h2>🎉 Add / Edit Acquaintance</h2>
+                <form id="bdayForm">
+                    <input type="text" id="name" placeholder="Full Name" required>
+                    <input type="date" id="date" required>
+                    <button type="submit" id="saveBtn">Save Birthday</button>
+                    <button type="button" id="cancelBtn" style="display:none; background:#8e8e93;">Cancel Edit</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h2>⚙️ Reminder Settings</h2>
+                <form id="settingsForm">
+                    <label>Alert Timing:</label>
+                    <select id="daysBefore">
+                        <option value="0">On the Day of Birthday</option>
+                        <option value="1">1 Day Before</option>
+                    </select>
+                    <label>Alert Time:</label>
+                    <input type="time" id="remindTime" required>
+                    <button type="submit">Update Preferences</button>
+                </form>
+            </div>
+
+            <button id="enableNotifications" style="background: #34c759;">Enable Phone Alarms</button>
+        </div>
+        
+        <div class="right-pane">
+            <div class="card">
+                <h2>📅 All Birthdays</h2>
+                <div id="bdayList">Loading...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
