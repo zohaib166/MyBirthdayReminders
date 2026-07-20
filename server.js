@@ -149,8 +149,21 @@ app.get('/api/cron-check', async (req, res) => {
             return res.status(200).send(`Time mismatch. Checking for ${formattedDbTime}, current local time is ${currentTime}`);
         }
 
-        // 3. Time matches! Calculate targets
-        let targetDate = new Date();
+        // 3. Time matches! Calculate targets using localized time zone values
+        const tzParts = new Intl.DateTimeFormat('en-US', {
+            timeZone: 'Asia/Kolkata',
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric'
+        }).formatToParts(now);
+
+        const localYear = parseInt(tzParts.find(p => p.type === 'year').value);
+        const localMonth = parseInt(tzParts.find(p => p.type === 'month').value) - 1; // 0-indexed for JS Date
+        const localDay = parseInt(tzParts.find(p => p.type === 'day').value);
+
+        // Create the clean base date rooted in the Indian calendar day
+        let targetDate = new Date(localYear, localMonth, localDay);
+
         if (settings.days_before === 1) targetDate.setDate(targetDate.getDate() + 1);
 
         const targetMonth = targetDate.getMonth() + 1;
